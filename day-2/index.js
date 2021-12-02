@@ -1025,5 +1025,27 @@ function calculatePosition(input) {
 	return horizontalPosition * depth;
 }
 
-console.log(calculatePosition(testInput));
-console.log(calculatePosition(input));
+function calculatePositionWithAim(input) {
+	const array = input.split("\n");
+	let horizontalPosition = 0;
+	let depth = 0;
+	let aim = 0;
+	for (let i = 0; i < array.length; i++) {
+		if (array[i].includes("forward")) {
+			const forward = array[i].split(" ")[1];
+			horizontalPosition += +forward;
+			depth += aim * +forward;
+		} else if (array[i].includes("up")) {
+			const up = array[i].split(" ")[1];
+			aim -= +up;
+		} else if (array[i].includes("down")) {
+			const down = array[i].split(" ")[1];
+			aim += +down;
+		}
+	}
+	console.log(horizontalPosition, depth, aim);
+	return horizontalPosition * depth;
+}
+
+console.log(calculatePositionWithAim(testInput));
+console.log(calculatePositionWithAim(input));
