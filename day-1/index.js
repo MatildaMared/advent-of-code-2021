@@ -2012,4 +2012,20 @@ function countIncrease(numbers) {
 	return count;
 }
 
-console.log(countIncrease(numbers));
+const testArr = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
+
+function countIncreaseInStepsOfThree(numbers) {
+	let count = 0;
+	for (let i = 0; i < numbers.length - 2; i++) {
+		if (
+			numbers[i] + numbers[i + 1] + numbers[i + 2] <
+			numbers[i + 1] + numbers[i + 2] + numbers[i + 3]
+		) {
+			count++;
+		}
+	}
+	return count;
+}
+
+console.log(countIncreaseInStepsOfThree(testArr));
+console.log(countIncreaseInStepsOfThree(numbers));
