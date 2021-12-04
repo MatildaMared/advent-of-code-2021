@@ -1054,5 +1054,73 @@ function calculateEpsilonRate(array) {
 	return parseInt(results.join(""), 2);
 }
 
+function calculateOxygenGeneratorRating(input) {
+	let array = input.split("\n");
+
+	for (let j = 0; j < array[0].length; j++) {
+		let zeros = [];
+		let ones = [];
+		for (let i = 0; i < array.length; i++) {
+			if (array[i].charAt(j) === "0") {
+				zeros.push(j);
+			} else {
+				ones.push(j);
+			}
+		}
+		if (array.length === 1) {
+			return parseInt(array[0], 2);
+		} else if (ones.length >= zeros.length) {
+			array = array.filter((item, index) => {
+				return item.charAt(j) === "1";
+			});
+		} else {
+			array = array.filter((item, index) => {
+				return item.charAt(j) === "0";
+			});
+		}
+	}
+	return parseInt(array[0], 2);
+}
+
+function calculateCO2ScrubberRating(input) {
+	let array = input.split("\n");
+
+	for (let j = 0; j < array[0].length; j++) {
+		let zeros = [];
+		let ones = [];
+		for (let i = 0; i < array.length; i++) {
+			if (array[i].charAt(j) === "0") {
+				zeros.push(j);
+			} else {
+				ones.push(j);
+			}
+		}
+		if (array.length === 1) {
+			return parseInt(array[0], 2);
+		} else if (ones.length >= zeros.length) {
+			array = array.filter((item, index) => {
+				return item.charAt(j) === "0";
+			});
+		} else {
+			array = array.filter((item, index) => {
+				return item.charAt(j) === "1";
+			});
+		}
+	}
+}
+
+function calculateLifeSupportRating(input) {
+	const oxygenGeneratorRating = calculateOxygenGeneratorRating(input);
+	const c02Rating = calculateCO2ScrubberRating(input);
+
+	return oxygenGeneratorRating * c02Rating;
+}
+
 console.log(calculatePowerConsumption(testInput));
 console.log(calculatePowerConsumption(input));
+
+console.log(calculateOxygenGeneratorRating(testInput));
+console.log(calculateCO2ScrubberRating(testInput));
+
+console.log(calculateLifeSupportRating(testInput));
+console.log(calculateLifeSupportRating(input));
